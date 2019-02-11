@@ -1,0 +1,32 @@
+#Median Finder
+import random
+import math
+
+def find_median(A):
+    m = math.ceil(len(A)/2)
+    find_median_2(A, m)
+
+def find_median_2(A, k):
+    if len(A) == 1:
+        return A[0]
+    else:
+        a_copy = A
+        L = []
+        R = []
+        n = random.choice(A)
+        a_copy.remove(n)
+        for i in range(0, len(a_copy)):
+            if a_copy[i] <= n:
+                L.append(a_copy[i])
+            else:
+                R.append(a_copy[i])
+        if len(L) == k - 1:
+            return n
+        elif len(L) >= k - 1:
+            find_median_2(L, k)
+        elif len(L) <= k - 1:
+            find_median_2(R, k - len(L) - 1)
+            
+List = [0, 5, 6, 7, 2, 8, 3, 4, 9]
+print(find_median_2(List, 5))
+    
